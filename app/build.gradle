@@ -5,6 +5,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    signingConfigs {
+        zqsapk {
+            storeFile file('C:\\Users\\xtayf\\OneDrive\\zqsapk.jks')
+            storePassword 'zqsapk'
+            keyAlias 'zqsapk0'
+            keyPassword 'zqsapk'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.izhangqian.checkintool"
@@ -13,6 +21,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.zqsapk
     }
     buildTypes {
         release {
