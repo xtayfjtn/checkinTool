@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.GestureDescription;
 import android.graphics.Path;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityEvent;
@@ -59,9 +60,33 @@ public class MyService extends AccessibilityService implements ServiceListener {
     }
 
     @Override
-    public AccessibilityNodeInfo findNodeByText(String text) {
+    public AccessibilityNodeInfo findNodeByText(String text, String viewType) {
         AccessibilityNodeInfo root = getRootInActiveWindow();
-        List<AccessibilityWindowInfo> list = getWindows();
+        AccessibilityNodeInfo nodeInfo = null;
+        if (root != null) {
+            List<AccessibilityNodeInfo> nodeInfos = root.findAccessibilityNodeInfosByText(text);
+            if (nodeInfos != null && nodeInfos.size() > 0) {
+                if (TextUtils.isEmpty(viewType)) {
+                    nodeInfo = nodeInfos.get(0);
+                } else {
+                    for (AccessibilityNodeInfo nodeInfo1 : nodeInfos) {
+                        String className = (String) nodeInfo1.getClassName();
+                        if (TextUtils.equals(className, viewType)) {
+                            nodeInfo = nodeInfo1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return nodeInfo;
+    }
+
+    // 需要重新写
+    @Override
+    public AccessibilityNodeInfo findNodeByDesc(String text, String viewType) {
+        AccessibilityNodeInfo root = getRootInActiveWindow();
         AccessibilityNodeInfo nodeInfo = null;
         if (root != null) {
             List<AccessibilityNodeInfo> nodeInfos = root.findAccessibilityNodeInfosByText(text);
@@ -73,18 +98,27 @@ public class MyService extends AccessibilityService implements ServiceListener {
         return nodeInfo;
     }
 
-    // 需要重新写
+    @Nullable
     @Override
-    public AccessibilityNodeInfo findNodeByDesc(String text) {
+    public AccessibilityNodeInfo findNodeById(@Nullable String id, @Nullable String viewType) {
         AccessibilityNodeInfo root = getRootInActiveWindow();
         AccessibilityNodeInfo nodeInfo = null;
         if (root != null) {
-            List<AccessibilityNodeInfo> nodeInfos = root.findAccessibilityNodeInfosByText(text);
+            List<AccessibilityNodeInfo> nodeInfos = root.findAccessibilityNodeInfosByViewId(id);
             if (nodeInfos != null && nodeInfos.size() > 0) {
-                nodeInfo = nodeInfos.get(0);
+                if (TextUtils.isEmpty(viewType)) {
+                    nodeInfo = nodeInfos.get(0);
+                } else {
+                    for (AccessibilityNodeInfo nodeInfo1 : nodeInfos) {
+                        String className = (String) nodeInfo1.getClassName();
+                        if (TextUtils.equals(className, viewType)) {
+                            nodeInfo = nodeInfo1;
+                            break;
+                        }
+                    }
+                }
             }
         }
-
         return nodeInfo;
     }
 

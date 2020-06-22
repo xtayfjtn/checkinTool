@@ -7,6 +7,7 @@ import com.izhangqian.checkintool.listener.ServiceListener
 
 open class BaseTouchClickHandler(listener: ServiceListener) : ActionHandler(listener) {
     override fun doAction(info: NodeDetailInfo) {
+        super.doAction(info)
         var nodeInfo : AccessibilityNodeInfo? = null
         if (info.id != null) {
             nodeInfo = findNodeById(info.id)
@@ -23,8 +24,6 @@ open class BaseTouchClickHandler(listener: ServiceListener) : ActionHandler(list
             var rect = Rect()
             nodeInfo.getBoundsInScreen(rect)
             mListener.performTouch(rect.centerX().toFloat(), rect.centerY().toFloat(), 50)
-        } else {
-            mListener.performTouch(957F, 2047F, 50)
         }
         return true
     }

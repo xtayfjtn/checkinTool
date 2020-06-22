@@ -6,14 +6,17 @@ import com.izhangqian.checkintool.listener.ServiceListener
 
 abstract class ActionHandler(listener: ServiceListener) {
     var mListener = listener
-    abstract fun doAction(info : NodeDetailInfo)
+    var mNodeDetail: NodeDetailInfo? = null
+    open fun doAction(info : NodeDetailInfo) {
+        mNodeDetail = info
+    }
 
     fun findNodeByText(textList : MutableList<String>?): AccessibilityNodeInfo? {
         var nodeInfo : AccessibilityNodeInfo? = null
         if (textList != null && textList.size > 0) {
             for (index in 1..10){
                 val text = textList[index % textList.size]
-                nodeInfo = mListener.findNodeByText(text)
+                nodeInfo = mListener.findNodeByText(text, mNodeDetail?.viewType)
                 if (nodeInfo != null) {
                     break
                 }
@@ -28,7 +31,18 @@ abstract class ActionHandler(listener: ServiceListener) {
     }
 
     fun findNodeById(idList : MutableList<String>?): AccessibilityNodeInfo? {
-        return null
+        var nodeInfo : AccessibilityNodeInfo? = null
+        if (idList != null && idList.size > 0) {
+            for (index in 1..10){
+                val text = idList[index % idList.size]
+                nodeInfo = mListener.findNodeById(text, mNodeDetail?.viewType)
+                if (nodeInfo != null) {
+                    break
+                }
+                Thread.sleep(100)
+            }
+        }
+        return nodeInfo
     }
 
     open fun performAction(nodeInfo: AccessibilityNodeInfo?) : Boolean {
