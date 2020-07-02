@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AidlTest</string>
+    <string name="home_title_desc">请选择功能,点击后跳转至对应功能页</string>
 </resources>

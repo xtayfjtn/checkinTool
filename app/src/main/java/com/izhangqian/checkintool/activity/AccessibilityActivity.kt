@@ -1,8 +1,9 @@
-package com.izhangqian.checkintool
+package com.izhangqian.checkintool.activity
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.actors.PDDActor
 import com.izhangqian.checkintool.service.MyService
 import kotlinx.android.synthetic.main.activity_accessibility.*

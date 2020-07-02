@@ -7,16 +7,17 @@ import android.util.Log
  */
 class Logit {
     companion object {
+        val TAG_PRE = "zqsapk_"
         fun d(tag: String, msg : String) {
-            Log.d(tag, msg)
+            Log.d(TAG_PRE + tag, msg)
         }
 
         fun i(tag : String, msg : String) {
-            Log.i(tag, msg)
+            Log.i(TAG_PRE + tag, msg)
         }
 
         fun e(tag : String, msg : String) {
-            Log.e(tag, msg)
+            Log.e(TAG_PRE + tag, msg)
         }
     }
 }

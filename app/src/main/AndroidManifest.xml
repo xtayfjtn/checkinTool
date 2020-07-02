@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.UtilActivity" />
-        <activity android:name="com.izhangqian.checkintool.MainActivity">
+        <activity android:name="com.izhangqian.checkintool.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.izhangqian.checkintool.AccessibilityActivity" />
+        <activity android:name="com.izhangqian.checkintool.activity.AccessibilityActivity" />
         <service
             android:name="com.izhangqian.checkintool.service.JobService"
             android:enabled="true"

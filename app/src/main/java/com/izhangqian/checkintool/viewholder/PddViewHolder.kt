@@ -4,7 +4,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.izhangqian.checkintool.AccessibilityActivity
+import com.izhangqian.checkintool.activity.AccessibilityActivity
 import com.izhangqian.checkintool.MyApplication
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.adapter.HomeMainAdapter
@@ -20,6 +20,7 @@ class PddViewHolder(itemView: View?) : HomeMainAdapter.HomeViewHolder(itemView) 
 
     override fun onBindView(homeItemBean: HomeItemBean) {
         super.onBindView(homeItemBean)
+        title?.text = homeItemBean.name
         pddLayout?.setOnClickListener {
             var intent = Intent(MyApplication.application, AccessibilityActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
