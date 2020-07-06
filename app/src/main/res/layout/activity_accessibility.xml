@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.izhangqian.checkintool.activity.AccessibilityActivity">
+    tools:context="com.izhangqian.checkintool.activity.CheckChooseActivity">
 
     <TextView
         android:id="@+id/helloservice"
@@ -13,14 +13,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="hello,service"/>
+        android:text="@string/check_in_guide"/>
 
-    <TextView
-        android:id="@+id/fuckyou"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/checkin_rv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/helloservice"
-        app:layout_constraintStart_toStartOf="@id/helloservice"
-        android:text="fuckyou" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/helloservice" />
 </androidx.constraintlayout.widget.ConstraintLayout>
