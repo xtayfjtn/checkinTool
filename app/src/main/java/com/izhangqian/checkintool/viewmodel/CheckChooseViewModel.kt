@@ -18,6 +18,8 @@ class CheckChooseViewModel(application: Application) : AndroidViewModel(applicat
             override fun subscribe(e: ObservableEmitter<MutableList<CheckinMainBean>>?) {
                 var mutableList = mutableListOf<CheckinMainBean>()
                 var checkinMainBean = CheckinMainBean()
+                checkinMainBean.cmdName = "拼多多浇水"
+                checkinMainBean.cmdpack = "com.xunmeng.pinduoduo"
                 mutableList.add(checkinMainBean)
                 e?.onNext(mutableList)
             }

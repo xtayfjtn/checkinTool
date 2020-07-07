@@ -8,32 +8,37 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:testOnly="false"
         android:supportsRtl="true"
+        android:testOnly="false"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.CheckinDetailActivity">
+            <intent-filter>
+                <action android:name="com.izhangqian.action.CMD_DETAIL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.UtilActivity" />
-        <activity android:name="com.izhangqian.checkintool.activity.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.CheckChooseActivity" />
 
-        <activity android:name="com.izhangqian.checkintool.activity.CheckChooseActivity" />
         <service
-            android:name="com.izhangqian.checkintool.service.JobService"
+            android:name=".service.JobService"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name="com.izhangqian.checkintool.service.JobIntentService"
+            android:name=".service.JobIntentService"
             android:exported="false" />
         <service
-            android:name="com.izhangqian.checkintool.service.MyIntentService"
+            android:name=".service.MyIntentService"
             android:exported="false" />
-
         <service
-            android:name="com.izhangqian.checkintool.service.MyService"
+            android:name=".service.MyService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />

@@ -3,5 +3,8 @@
     <string name="home_title_desc">请选择功能,点击后跳转至对应功能页</string>
     <string name="check_in_guide">请选择下方一项功能进行执行</string>
     <string name="check_in_execute">执行</string>
+    <string name="check_in_detail_edit">详情</string>
     <string name="check_in_default_name">这是默认签到名</string>
+    <string name="check_in_detail_name">任务名</string>
+    <string name="check_in_detail_package">包名</string>
 </resources>
