@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.OrientationHelper
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.adapter.HomeMainAdapter
 import com.izhangqian.checkintool.bean.HomeItemBean
-import com.izhangqian.checkintool.sqlite.DbManager
+import com.izhangqian.checkintool.sqlite.HomeItemDbManager
 import com.izhangqian.checkintool.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -36,7 +36,7 @@ class MainActivity : FragmentActivity() {
         home_title_tv.setOnClickListener {
             var homeItemBean = HomeItemBean(1)
             homeItemBean.name = "这是拼多多的实践" + System.currentTimeMillis()
-            DbManager.instance.insertHomeItem(homeItemBean)
+            HomeItemDbManager.instance.insertHomeItem(homeItemBean)
         }
         mMainViewModel!!.mHomeData?.observe(this, object : Observer<List<HomeItemBean>?> {
             override fun onChanged(t: List<HomeItemBean>?) {

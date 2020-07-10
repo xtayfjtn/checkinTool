@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/check_in_detail_name_et"
         android:text="@string/check_in_detail_name"/>
 
     <EditText
@@ -28,6 +29,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/check_in_detail_name_label"
+        app:layout_constraintBottom_toBottomOf="@id/check_in_detail_pack_et"
         android:text="@string/check_in_detail_package"/>
 
     <EditText

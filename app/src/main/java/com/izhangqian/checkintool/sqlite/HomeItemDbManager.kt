@@ -6,17 +6,16 @@ import android.database.sqlite.SQLiteDatabase
 import com.izhangqian.checkintool.MyApplication
 import com.izhangqian.checkintool.bean.HomeItemBean
 import com.izhangqian.checkintool.utils.Logit
-import kotlin.reflect.KProperty
 
-class DbManager private constructor() {
+class HomeItemDbManager private constructor() {
     init {
         getDb(MyApplication.application)
     }
     var mDb : SQLiteDatabase? = null
     var sqliteHelper : MySqliteHelper? = null
     companion object {
-        val instance : DbManager by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-            DbManager()
+        val instance : HomeItemDbManager by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            HomeItemDbManager()
         }
     }
     private fun getDb(context: Context?) {
