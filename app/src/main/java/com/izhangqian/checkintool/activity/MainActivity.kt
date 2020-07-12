@@ -33,7 +33,7 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun initEvent() {
-        home_title_tv.setOnClickListener {
+        test_add_btn.setOnClickListener {
             var homeItemBean = HomeItemBean(1)
             homeItemBean.name = "这是拼多多的实践" + System.currentTimeMillis()
             HomeItemDbManager.instance.insertHomeItem(homeItemBean)

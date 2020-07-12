@@ -7,4 +7,5 @@
     <string name="check_in_default_name">这是默认签到名</string>
     <string name="check_in_detail_name">任务名</string>
     <string name="check_in_detail_package">包名</string>
+    <string name="test_text">添加</string>
 </resources>

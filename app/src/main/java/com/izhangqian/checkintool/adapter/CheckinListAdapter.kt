@@ -10,7 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.izhangqian.checkintool.MyApplication
 import com.izhangqian.checkintool.R
+import com.izhangqian.checkintool.actors.NormalActor
+import com.izhangqian.checkintool.actors.PDDActor
 import com.izhangqian.checkintool.bean.checkin.CheckinMainBean
+import com.izhangqian.checkintool.service.MyService
 import com.izhangqian.checkintool.utils.Constants
 
 class CheckinListAdapter(context: Context) : RecyclerView.Adapter<CheckinListAdapter.CheckinViewHolder>() {
@@ -58,6 +61,13 @@ class CheckinListAdapter(context: Context) : RecyclerView.Adapter<CheckinListAda
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 intent.putExtra(Constants.EXTRA_CMD_BEAN, checkinMainBean)
                 MyApplication.application?.startActivity(intent)
+            }
+            check_run_btn.setOnClickListener {
+
+//                var clickActor = PDDActor(MyService.getListener())
+//                clickActor.handleAction("111")
+                var clickActor = NormalActor(MyService.getListener())
+                clickActor.handleAction(checkinMainBean)
             }
         }
     }

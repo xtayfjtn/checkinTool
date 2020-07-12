@@ -5,4 +5,6 @@ class NodeDetailInfo {
     var text : MutableList<String>? = null
     var desc : MutableList<String>? = null
     var viewType : String = ""
+    var positionX : String = ""
+    var positionY : String = ""
 }

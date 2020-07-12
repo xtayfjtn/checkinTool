@@ -7,6 +7,7 @@ class CheckinCommond() : Parcelable {
     var cmdName : String = ""
     var cmdStep : Int = 0
     var cmdType : Int = 0
+    var cmdViewId : String = ""
     var cmdText : String = ""
     var cmdDesc : String = ""
     var cmdViewType : String = ""
@@ -17,6 +18,7 @@ class CheckinCommond() : Parcelable {
         cmdName = parcel.readString() ?: ""
         cmdStep = parcel.readInt()
         cmdType = parcel.readInt()
+        cmdViewId = parcel.readString() ?: ""
         cmdText = parcel.readString() ?: ""
         cmdDesc = parcel.readString() ?: ""
         cmdViewType = parcel.readString() ?: ""
@@ -28,6 +30,7 @@ class CheckinCommond() : Parcelable {
         parcel.writeString(cmdName)
         parcel.writeInt(cmdStep)
         parcel.writeInt(cmdType)
+        parcel.writeString(cmdViewId)
         parcel.writeString(cmdText)
         parcel.writeString(cmdDesc)
         parcel.writeString(cmdViewType)
@@ -39,6 +42,7 @@ class CheckinCommond() : Parcelable {
         return 0
     }
 
+
     companion object CREATOR : Parcelable.Creator<CheckinCommond> {
         override fun createFromParcel(parcel: Parcel): CheckinCommond {
             return CheckinCommond(parcel)
@@ -47,5 +51,8 @@ class CheckinCommond() : Parcelable {
         override fun newArray(size: Int): Array<CheckinCommond?> {
             return arrayOfNulls(size)
         }
+        val CMD_TYPE_JUMP = 1 // 跳转首页
+        val CMD_TYPE_CLICK = 2 // 点击事件
+        val CMD_TYPE_TOUCH = 3 //点击坐标
     }
 }

@@ -38,6 +38,7 @@ class CheckinItemDbManager private constructor() {
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_NAME, checkinMainBean.cmdName)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_STEP, commond.cmdStep)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_TYPE, commond.cmdType)
+            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_VIEW_ID, commond.cmdViewId)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_TEXT, commond.cmdText)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_VIEWTYPE, commond.cmdViewType)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_POSITIONX, commond.cmdPositionX)
@@ -51,15 +52,17 @@ class CheckinItemDbManager private constructor() {
         var cursor : Cursor? = null
         try {
             cursor = mDb?.query(MySqliteHelper.CHECK_IN_TABLE_NAME, null, "", null, "", "", "")
-            do {
-                var checkinMainBean = CheckinMainBean()
-                var name = cursor?.getString(cursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_NAME)) ?: ""
-                var pack = cursor?.getString(cursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_PACKAGE)) ?: ""
-                checkinMainBean.cmdName = name
-                checkinMainBean.cmdpack = pack
-                checkinMainBean.cmdList = getComnondsbyName(name)
-                result.add(checkinMainBean)
-            } while (cursor?.moveToNext() == true)
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    var checkinMainBean = CheckinMainBean()
+                    var name = cursor.getString(cursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_NAME)) ?: ""
+                    var pack = cursor.getString(cursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_PACKAGE)) ?: ""
+                    checkinMainBean.cmdName = name
+                    checkinMainBean.cmdpack = pack
+                    checkinMainBean.cmdList = getComnondsbyName(name)
+                    result.add(checkinMainBean)
+                } while (cursor?.moveToNext() == true)
+            }
         } catch (e : Exception) {
             Logit.e(TAG, "error: " + e.message)
         } finally {
@@ -78,27 +81,31 @@ class CheckinItemDbManager private constructor() {
         var cmdCursor : Cursor? = null
         var result = mutableListOf<CheckinCommond>()
         try {
-            cmdCursor = mDb?.query(MySqliteHelper.CHECK_IN_CMD_TABLE, null, MySqliteHelper.CHECK_IN_CMD_NAME + "=?", arrayOf(name), "", "", MySqliteHelper.CHECK_IN_CMD_STEP + " DESC")
-            do {
-                var checkinCommond = CheckinCommond()
-                var step = cmdCursor?.getInt(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_STEP))
-                var type = cmdCursor?.getInt(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_TYPE))
-                var text = cmdCursor?.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_TEXT))
-                var desc = cmdCursor?.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_DESC))
-                var viewTye = cmdCursor?.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_VIEWTYPE))
-                var positionX = cmdCursor?.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_POSITIONX))
-                var positionY = cmdCursor?.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_POSITIONY))
-                checkinCommond.cmdStep = step ?: 0
-                checkinCommond.cmdType = type ?: 0
-                checkinCommond.cmdText = text ?: ""
-                checkinCommond.cmdDesc = desc ?: ""
-                checkinCommond.cmdViewType = viewTye ?: ""
-                checkinCommond.cmdPositionX = positionX ?: ""
-                checkinCommond.cmdPositionY = positionY ?: ""
-                result.add(checkinCommond)
-            } while (cmdCursor?.moveToNext() == true)
+            cmdCursor = mDb?.query(MySqliteHelper.CHECK_IN_CMD_TABLE, null, MySqliteHelper.CHECK_IN_CMD_NAME + "=?", arrayOf(name), "", "", MySqliteHelper.CHECK_IN_CMD_STEP + "")
+            if (cmdCursor != null && cmdCursor.moveToFirst()) {
+                do {
+                    val checkinCommond = CheckinCommond()
+                    val step = cmdCursor.getInt(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_STEP))
+                    val type = cmdCursor.getInt(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_TYPE))
+                    var viewId = cmdCursor.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_VIEW_ID))
+                    var text = cmdCursor.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_TEXT))
+                    var desc = cmdCursor.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_DESC))
+                    var viewTye = cmdCursor.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_VIEWTYPE))
+                    var positionX = cmdCursor.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_POSITIONX))
+                    var positionY = cmdCursor.getString(cmdCursor.getColumnIndex(MySqliteHelper.CHECK_IN_CMD_POSITIONY))
+                    checkinCommond.cmdStep = step ?: 0
+                    checkinCommond.cmdType = type ?: 0
+                    checkinCommond.cmdViewId = viewId ?: ""
+                    checkinCommond.cmdText = text ?: ""
+                    checkinCommond.cmdDesc = desc ?: ""
+                    checkinCommond.cmdViewType = viewTye ?: ""
+                    checkinCommond.cmdPositionX = positionX ?: ""
+                    checkinCommond.cmdPositionY = positionY ?: ""
+                    result.add(checkinCommond)
+                } while (cmdCursor.moveToNext())
+            }
         } catch (e : Exception) {
-
+            Logit.e(TAG, "error: " + e.message)
         } finally {
             try {
                 if (cmdCursor != null) {

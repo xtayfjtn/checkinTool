@@ -27,24 +27,6 @@ class CheckChooseActivity : AppCompatActivity() {
         initData()
         initView()
         initEvent()
-        helloservice.setOnClickListener {
-//            var clickActor = PDDActor(MyService.getListener())
-//            clickActor.handleAction("111")
-            var cmd1 = CheckinCommond()
-            cmd1.cmdStep = 0
-            cmd1.cmdType = 1
-            cmd1.cmdText = "这是第一部"
-            var cmd2 = CheckinCommond()
-            cmd2.cmdStep = 1
-            cmd2.cmdType = 2
-            cmd2.cmdText = "这是第二步"
-            var checkinMainBean = CheckinMainBean()
-            checkinMainBean.cmdName = "拼多读"
-            checkinMainBean.cmdpack = "com.xunmeng.pinduoduo"
-            checkinMainBean.cmdList.add(cmd1)
-            checkinMainBean.cmdList.add(cmd2)
-            CheckinItemDbManager.instance.insertCheckinItem(checkinMainBean)
-        }
     }
 
     private fun initData() {
@@ -58,6 +40,41 @@ class CheckChooseActivity : AppCompatActivity() {
         checkin_rv.layoutManager = linearLayoutManager
         mCheckinListAdapter = CheckinListAdapter(this)
         checkin_rv.adapter = mCheckinListAdapter
+
+        test_add_btn.setOnClickListener {
+//            var clickActor = PDDActor(MyService.getListener())
+//            clickActor.handleAction("111")
+            var cmd1 = CheckinCommond()
+            cmd1.cmdStep = 0
+            cmd1.cmdType = CheckinCommond.CMD_TYPE_JUMP
+            cmd1.cmdText = "这是第一部"
+            var cmd2 = CheckinCommond()
+            cmd2.cmdStep = 1
+            cmd2.cmdType = CheckinCommond.CMD_TYPE_CLICK
+            cmd2.cmdText = "多多果园"
+            var cmd3 = CheckinCommond()
+            cmd3.cmdStep = 2
+            cmd3.cmdType = CheckinCommond.CMD_TYPE_TOUCH
+            cmd3.cmdViewId = "com.xunmeng.pinduoduo:id/tv_title"
+            cmd3.cmdPositionX = "957"
+            cmd3.cmdPositionY = "2047"
+            var checkinMainBean = CheckinMainBean()
+            checkinMainBean.cmdName = "拼多读" + System.currentTimeMillis()
+            checkinMainBean.cmdpack = "com.xunmeng.pinduoduo"
+            checkinMainBean.cmdList.add(cmd1)
+            checkinMainBean.cmdList.add(cmd2)
+            checkinMainBean.cmdList.add(cmd3)
+            for (index in 1..10) {
+                var cmd4 = CheckinCommond()
+                cmd4.cmdStep = index + 2
+                cmd4.cmdType = CheckinCommond.CMD_TYPE_TOUCH
+                cmd4.cmdViewId = "com.xunmeng.pinduoduo:id/tv_title"
+                cmd4.cmdPositionX = "957"
+                cmd4.cmdPositionY = "2047"
+                checkinMainBean.cmdList.add(cmd4)
+            }
+            CheckinItemDbManager.instance.insertCheckinItem(checkinMainBean)
+        }
     }
 
     private fun initEvent() {
