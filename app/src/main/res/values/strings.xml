@@ -8,4 +8,6 @@
     <string name="check_in_detail_name">任务名</string>
     <string name="check_in_detail_package">包名</string>
     <string name="test_text">添加</string>
+
+    <string name="cmd_step_type_desc">操作类型</string>
 </resources>
