@@ -11,10 +11,6 @@ import com.izhangqian.checkintool.utils.Constants
 import kotlinx.android.synthetic.main.activity_checkin_detail.*
 
 class CheckinDetailActivity : AppCompatActivity() {
-    var mCmdId : String = ""
-    var mCmdName : String = ""
-    var mCmdPack : String = ""
-    var mCmdList = mutableListOf<CheckinCommond>()
     var mCheckinMainBean : CheckinMainBean? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +35,8 @@ class CheckinDetailActivity : AppCompatActivity() {
     }
 
     private fun initEvent() {
+        cmd_submit_btn.setOnClickListener {
 
+        }
     }
 }

@@ -10,4 +10,11 @@
     <string name="test_text">添加</string>
 
     <string name="cmd_step_type_desc">操作类型</string>
+    <string name="cmd_detail_update">更新</string>
+    <string name="cmd_node_viewtype">点击控件类型</string>
+    <string name="cmd_node_text">点击文本</string>
+    <string name="cmd_node_id">点击id</string>
+    <string name="cmd_node_desc">点击描述文本</string>
+    <string name="cmd_node_positionX">点击x坐标</string>
+    <string name="cmd_node_positonY">点击y坐标</string>
 </resources>

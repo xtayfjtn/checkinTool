@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.izhangqian.checkintool.R
@@ -37,6 +38,16 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
 
         val cmdSpinner = itemView.findViewById<Spinner>(R.id.cmd_step_type_select)
         fun bindView(checkinCommond: CheckinCommond) {
+            cmdSpinner.setSelection(checkinCommond.cmdType - 1)
+            cmdSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    checkinCommond.cmdType = position + 1
+                }
+            }
         }
     }
 }

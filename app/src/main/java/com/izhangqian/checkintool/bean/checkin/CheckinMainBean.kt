@@ -4,20 +4,20 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class CheckinMainBean() : Parcelable {
-    var cmdId : String = ""
+    var cmdId : Int = 0
     var cmdpack : String = ""
     var cmdName : String = ""
     var cmdList : MutableList<CheckinCommond> = mutableListOf()
 
     constructor(parcel: Parcel) : this() {
-        cmdId = parcel.readString() ?: ""
+        cmdId = parcel.readInt()
         cmdpack = parcel.readString() ?: ""
         cmdName = parcel.readString() ?: ""
         parcel.readList(cmdList, javaClass.classLoader)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(cmdId)
+        parcel.writeInt(cmdId)
         parcel.writeString(cmdpack)
         parcel.writeString(cmdName)
         parcel.writeList(cmdList)

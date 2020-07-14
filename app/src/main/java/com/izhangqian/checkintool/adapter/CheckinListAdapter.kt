@@ -53,7 +53,7 @@ class CheckinListAdapter(context: Context) : RecyclerView.Adapter<CheckinListAda
 
         fun bindView(checkinMainBean: CheckinMainBean) {
             title.text = checkinMainBean.cmdName
-            id = checkinMainBean.cmdId
+            id = checkinMainBean.cmdId.toString()
             check_edit_detail.setOnClickListener {
                 // 跳转至详情页
                 var intent = Intent()

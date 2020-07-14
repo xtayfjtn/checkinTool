@@ -19,4 +19,33 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/cmd_step_type_label"
         android:entries="@array/cmdtype"/>
+
+    <TextView
+        android:id="@+id/cmd_node_id_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/cmd_step_type_select"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/cmd_node_id"/>
+    <EditText
+        android:id="@+id/cmd_node_id_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/cmd_node_id_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/cmd_node_text_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/cmd_node_id_et"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/cmd_node_text"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/cmd_node_text_tv"
+        app:layout_constraintTop_toBottomOf="@id/cmd_node_id_et" />
 </androidx.constraintlayout.widget.ConstraintLayout>
