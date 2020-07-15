@@ -33,9 +33,9 @@ class MySqliteHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         val CHECK_IN_CMD_POSITIONX = "cmd_positionx"
         val CHECK_IN_CMD_POSITIONY = "cmd_positiony"
         // 创建签到数据库
-        val CHECK_IN_DB_CREATE = "create table " + CHECK_IN_TABLE_NAME + "(" + CHECK_IN_CMD_NAME + " text, " +
+        val CHECK_IN_DB_CREATE = "create table " + CHECK_IN_TABLE_NAME + "(" + CHECK_IN_CMD_ID + " integer primary key autoincrement, " + CHECK_IN_CMD_NAME + " text, " +
                 CHECK_IN_CMD_PACKAGE + " text);"
-        val CHECK_IN_CMD_DB_CREATE = "create table " + CHECK_IN_CMD_TABLE + "(" + CHECK_IN_CMD_ID + " integer primary key autoincrement, " +
+        val CHECK_IN_CMD_DB_CREATE = "create table " + CHECK_IN_CMD_TABLE + "(" +
                 CHECK_IN_CMD_NAME + " text, " + CHECK_IN_CMD_STEP + " integer, " + CHECK_IN_CMD_TYPE + " integer, " +
                 CHECK_IN_CMD_VIEW_ID + " text, " + CHECK_IN_CMD_TEXT + " text, " + CHECK_IN_CMD_DESC + " text, " +
                 CHECK_IN_CMD_VIEWTYPE + " text, " + CHECK_IN_CMD_POSITIONX + " text, " + CHECK_IN_CMD_POSITIONY + " text);"
