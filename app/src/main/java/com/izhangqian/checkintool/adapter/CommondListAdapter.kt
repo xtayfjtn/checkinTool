@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.EditText
 import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.izhangqian.checkintool.R
@@ -37,6 +38,8 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
     class CommondViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val cmdSpinner = itemView.findViewById<Spinner>(R.id.cmd_step_type_select)
+        val idEt = itemView.findViewById<EditText>(R.id.cmd_node_id_et)
+        val textEt = itemView.findViewById<EditText>(R.id.cmd_node_text_et)
         fun bindView(checkinCommond: CheckinCommond) {
             cmdSpinner.setSelection(checkinCommond.cmdType - 1)
             cmdSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -48,6 +51,9 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
                     checkinCommond.cmdType = position + 1
                 }
             }
+
+            idEt.setText(checkinCommond.cmdViewId)
+            textEt.setText(checkinCommond.cmdText)
         }
     }
 }

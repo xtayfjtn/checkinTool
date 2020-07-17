@@ -44,6 +44,7 @@
         android:text="@string/cmd_node_text"/>
 
     <EditText
+        android:id="@+id/cmd_node_text_et"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/cmd_node_text_tv"

@@ -60,7 +60,7 @@ class CheckinItemDbManager private constructor() {
         var cv = ContentValues()
         cv.put(MySqliteHelper.CHECK_IN_CMD_NAME, checkinMainBean.cmdName)
         cv.put(MySqliteHelper.CHECK_IN_CMD_PACKAGE, checkinMainBean.cmdpack)
-        mDb?.insert(MySqliteHelper.CHECK_IN_TABLE_NAME, "", cv)
+        mDb?.update(MySqliteHelper.CHECK_IN_TABLE_NAME, cv, MySqliteHelper.CHECK_IN_CMD_ID + "=?", arrayOf(checkinMainBean.cmdId.toString()))
         var cmds = checkinMainBean.cmdList
         for (commond in cmds) {
             var cmdCv = ContentValues()
@@ -72,7 +72,7 @@ class CheckinItemDbManager private constructor() {
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_VIEWTYPE, commond.cmdViewType)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_POSITIONX, commond.cmdPositionX)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_POSITIONY, commond.cmdPositionY)
-            mDb?.update(MySqliteHelper.CHECK_IN_CMD_TABLE, cmdCv, MySqliteHelper.CHECK_IN_CMD_ID + "=?", arrayOf(checkinMainBean.cmdId.toString()))
+            mDb?.update(MySqliteHelper.CHECK_IN_CMD_TABLE, cmdCv, MySqliteHelper.CHECK_IN_CMD_NAME + "=? and " + MySqliteHelper.CHECK_IN_CMD_STEP + "=?", arrayOf(checkinMainBean.cmdName, commond.cmdStep.toString()))
         }
         return true
     }
@@ -154,7 +154,7 @@ class CheckinItemDbManager private constructor() {
         var checkinMainBean : CheckinMainBean? = null
         var cursor : Cursor? = null
         try {
-            cursor = mDb?.query(MySqliteHelper.CHECK_IN_CMD_TABLE, null, MySqliteHelper.CHECK_IN_CMD_ID + "=?", arrayOf(int), "", "", "")
+            cursor = mDb?.query(MySqliteHelper.CHECK_IN_TABLE_NAME, null, MySqliteHelper.CHECK_IN_CMD_ID + "=?", arrayOf(int), "", "", "")
             if (cursor != null && cursor.moveToFirst()) {
                 do {
                     checkinMainBean = CheckinMainBean()

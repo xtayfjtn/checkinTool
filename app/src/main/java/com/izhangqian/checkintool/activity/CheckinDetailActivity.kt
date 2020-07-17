@@ -7,6 +7,7 @@ import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.adapter.CommondListAdapter
 import com.izhangqian.checkintool.bean.checkin.CheckinCommond
 import com.izhangqian.checkintool.bean.checkin.CheckinMainBean
+import com.izhangqian.checkintool.sqlite.CheckinItemDbManager
 import com.izhangqian.checkintool.utils.Constants
 import kotlinx.android.synthetic.main.activity_checkin_detail.*
 
@@ -36,7 +37,7 @@ class CheckinDetailActivity : AppCompatActivity() {
 
     private fun initEvent() {
         cmd_submit_btn.setOnClickListener {
-
+            mCheckinMainBean?.let { it1 -> CheckinItemDbManager.instance.insertorUpdateCheckinItem(it1) }
         }
     }
 }
