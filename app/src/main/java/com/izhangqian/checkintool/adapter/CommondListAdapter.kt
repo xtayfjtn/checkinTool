@@ -1,6 +1,8 @@
 package com.izhangqian.checkintool.adapter
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.bean.checkin.CheckinCommond
+import com.izhangqian.checkintool.bean.checkin.CheckinMainBean
 
 class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAdapter.CommondViewHolder>() {
 
@@ -35,6 +38,11 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
         holder.bindView(mCmdList[position])
     }
 
+    fun updateData(mutableList: MutableList<CheckinCommond>) {
+        mCmdList = mutableList
+        notifyDataSetChanged()
+    }
+
     class CommondViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val cmdSpinner = itemView.findViewById<Spinner>(R.id.cmd_step_type_select)
@@ -53,7 +61,33 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
             }
 
             idEt.setText(checkinCommond.cmdViewId)
+            idEt.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    checkinCommond.cmdViewId = s.toString();
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                    TODO("Not yet implemented")
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                    TODO("Not yet implemented")
+                }
+            })
             textEt.setText(checkinCommond.cmdText)
+            textEt.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    checkinCommond.cmdText = s.toString()
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                    TODO("Not yet implemented")
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                    TODO("Not yet implemented")
+                }
+            })
         }
     }
 }

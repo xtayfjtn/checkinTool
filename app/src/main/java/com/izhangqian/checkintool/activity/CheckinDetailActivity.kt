@@ -2,6 +2,9 @@ package com.izhangqian.checkintool.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.adapter.CommondListAdapter
@@ -9,10 +12,13 @@ import com.izhangqian.checkintool.bean.checkin.CheckinCommond
 import com.izhangqian.checkintool.bean.checkin.CheckinMainBean
 import com.izhangqian.checkintool.sqlite.CheckinItemDbManager
 import com.izhangqian.checkintool.utils.Constants
+import com.izhangqian.checkintool.viewmodel.CheckCmdDetailViewModel
 import kotlinx.android.synthetic.main.activity_checkin_detail.*
 
 class CheckinDetailActivity : AppCompatActivity() {
     var mCheckinMainBean : CheckinMainBean? = null
+    var mCheckCmdDetailViewModel : CheckCmdDetailViewModel? = null
+    var commondListAdapter : CommondListAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkin_detail)
@@ -23,6 +29,8 @@ class CheckinDetailActivity : AppCompatActivity() {
 
     private fun initData() {
         mCheckinMainBean = intent.getParcelableExtra<CheckinMainBean>(Constants.EXTRA_CMD_BEAN)
+        mCheckCmdDetailViewModel = ViewModelProvider(this).get(CheckCmdDetailViewModel::class.java)
+        mCheckCmdDetailViewModel?.getCheckCmdDetailByid(mCheckinMainBean?.cmdId.toString())
     }
 
     private fun initView() {
@@ -31,7 +39,7 @@ class CheckinDetailActivity : AppCompatActivity() {
         var linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         check_in_cmd_rv.layoutManager = linearLayoutManager
-        var commondListAdapter = CommondListAdapter(this, mCheckinMainBean?.cmdList)
+        commondListAdapter = CommondListAdapter(this)
         check_in_cmd_rv.adapter = commondListAdapter
     }
 
@@ -39,5 +47,12 @@ class CheckinDetailActivity : AppCompatActivity() {
         cmd_submit_btn.setOnClickListener {
             mCheckinMainBean?.let { it1 -> CheckinItemDbManager.instance.insertorUpdateCheckinItem(it1) }
         }
+
+        mCheckCmdDetailViewModel?.mCheckCmdDetal?.observe({ lifecycle }, {
+            if (it != null) {
+                mCheckinMainBean = it
+                mCheckinMainBean?.cmdList?.let { it1 -> commondListAdapter?.updateData(it1) }
+            }
+        })
     }
 }
