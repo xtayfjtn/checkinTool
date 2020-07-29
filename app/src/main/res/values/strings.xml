@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AidlTest</string>
+
+    <string name="common_delete">删除</string>
+
     <string name="home_title_desc">请选择功能,点击后跳转至对应功能页</string>
     <string name="check_in_guide">请选择下方一项功能进行执行</string>
     <string name="check_in_execute">执行</string>
