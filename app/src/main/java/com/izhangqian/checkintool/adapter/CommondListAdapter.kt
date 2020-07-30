@@ -48,6 +48,10 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
         val cmdSpinner = itemView.findViewById<Spinner>(R.id.cmd_step_type_select)
         val idEt = itemView.findViewById<EditText>(R.id.cmd_node_id_et)
         val textEt = itemView.findViewById<EditText>(R.id.cmd_node_text_et)
+        val descEt = itemView.findViewById<EditText>(R.id.cmd_node_desc_et)
+        val viewType = itemView.findViewById<EditText>(R.id.cmd_node_viewtype_et)
+        val posX = itemView.findViewById<EditText>(R.id.cmd_node_positionx_et)
+        val posY = itemView.findViewById<EditText>(R.id.cmd_node_positiony_et)
         fun bindView(checkinCommond: CheckinCommond) {
             cmdSpinner.setSelection(checkinCommond.cmdType - 1)
             cmdSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -61,33 +65,56 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
             }
 
             idEt.setText(checkinCommond.cmdViewId)
-            idEt.addTextChangedListener(object : TextWatcher {
+            idEt.addTextChangedListener(object : MyTextWatch() {
                 override fun afterTextChanged(s: Editable?) {
                     checkinCommond.cmdViewId = s.toString();
                 }
-
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                    TODO("Not yet implemented")
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                    TODO("Not yet implemented")
-                }
             })
             textEt.setText(checkinCommond.cmdText)
-            textEt.addTextChangedListener(object : TextWatcher {
+            textEt.addTextChangedListener(object : MyTextWatch() {
                 override fun afterTextChanged(s: Editable?) {
                     checkinCommond.cmdText = s.toString()
                 }
-
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                    TODO("Not yet implemented")
+            })
+            descEt.setText(checkinCommond.cmdDesc)
+            descEt.addTextChangedListener(object : MyTextWatch() {
+                override fun afterTextChanged(s: Editable?) {
+                    checkinCommond.cmdDesc = s.toString()
                 }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                    TODO("Not yet implemented")
+            })
+            viewType.setText(checkinCommond.cmdViewType)
+            viewType.addTextChangedListener(object : MyTextWatch() {
+                override fun afterTextChanged(s: Editable?) {
+                    checkinCommond.cmdViewType = s.toString()
+                }
+            })
+            posX.setText(checkinCommond.cmdPositionX)
+            posX.addTextChangedListener(object : MyTextWatch() {
+                override fun afterTextChanged(s: Editable?) {
+                    checkinCommond.cmdPositionX = s.toString()
+                }
+            })
+            posY.setText(checkinCommond.cmdPositionY)
+            posY.addTextChangedListener(object : MyTextWatch() {
+                override fun afterTextChanged(s: Editable?) {
+                    checkinCommond.cmdPositionY = s.toString()
                 }
             })
         }
+    }
+
+    open class MyTextWatch : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+//            TODO("Not yet implemented")
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            TODO("Not yet implemented")
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//            TODO("Not yet implemented")
+        }
+
     }
 }

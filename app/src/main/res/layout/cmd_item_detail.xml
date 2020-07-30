@@ -32,8 +32,9 @@
             android:text="@string/cmd_node_id"/>
         <EditText
             android:id="@+id/cmd_node_id_et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -47,8 +48,9 @@
             android:text="@string/cmd_node_text"/>
         <EditText
             android:id="@+id/cmd_node_text_et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,23 +64,27 @@
             android:text="@string/cmd_node_desc"/>
         <EditText
             android:id="@+id/cmd_node_desc_et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
-            android:id="@+id/cmd_node_viewtype_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cmd_node_viewtype"/>
+
         <EditText
             android:id="@+id/cmd_node_viewtype_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/cmd_node_viewtype_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cmd_node_viewtype" />
     </LinearLayout>
 
     <LinearLayout
@@ -91,8 +97,9 @@
             android:text="@string/cmd_node_positionX"/>
         <EditText
             android:id="@+id/cmd_node_positionx_et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <LinearLayout
@@ -105,8 +112,9 @@
             android:text="@string/cmd_node_positonY"/>
         <EditText
             android:id="@+id/cmd_node_positiony_et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
