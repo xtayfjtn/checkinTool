@@ -40,6 +40,11 @@ class CheckinDetailActivity : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         check_in_cmd_rv.layoutManager = linearLayoutManager
         commondListAdapter = CommondListAdapter(this)
+        commondListAdapter?.setAdapterEvent(object : CommondListAdapter.AdapterListener {
+            override fun updateDatabase() {
+                mCheckinMainBean?.let { it1 -> CheckinItemDbManager.instance.insertorUpdateCheckinItem(it1) }
+            }
+        })
         check_in_cmd_rv.adapter = commondListAdapter
     }
 

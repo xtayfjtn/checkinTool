@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.bean.checkin.CheckinCommond
-import com.izhangqian.checkintool.bean.checkin.CheckinMainBean
+import java.lang.ref.WeakReference
 
 class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAdapter.CommondViewHolder>() {
 
@@ -23,11 +24,12 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
     }
     var mContext = context
     var mCmdList = mutableListOf<CheckinCommond>()
+    var mListener : AdapterListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommondViewHolder {
 
         var view = LayoutInflater.from(mContext).inflate(R.layout.cmd_item_detail, parent, false)
-        return CommondViewHolder(view)
+        return CommondViewHolder(view, this)
     }
 
     override fun getItemCount(): Int {
@@ -38,12 +40,22 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
         holder.bindView(mCmdList[position])
     }
 
+    fun setAdapterEvent(adapterListener: AdapterListener) {
+        mListener = adapterListener
+    }
+
     fun updateData(mutableList: MutableList<CheckinCommond>) {
         mCmdList = mutableList
         notifyDataSetChanged()
     }
 
-    class CommondViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun removeData(checkinCommond: CheckinCommond) {
+        mCmdList.remove(checkinCommond)
+        notifyDataSetChanged()
+        mListener?.updateDatabase()
+    }
+
+    class CommondViewHolder(itemView: View, adapter : CommondListAdapter? = null) : RecyclerView.ViewHolder(itemView) {
 
         val cmdSpinner = itemView.findViewById<Spinner>(R.id.cmd_step_type_select)
         val idEt = itemView.findViewById<EditText>(R.id.cmd_node_id_et)
@@ -52,6 +64,11 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
         val viewType = itemView.findViewById<EditText>(R.id.cmd_node_viewtype_et)
         val posX = itemView.findViewById<EditText>(R.id.cmd_node_positionx_et)
         val posY = itemView.findViewById<EditText>(R.id.cmd_node_positiony_et)
+        val delete = itemView.findViewById<Button>(R.id.cmd_delete_btn)
+        var mCmdList : WeakReference<CommondListAdapter>? = null
+        init {
+            mCmdList = WeakReference<CommondListAdapter>(adapter) ?: null
+        }
         fun bindView(checkinCommond: CheckinCommond) {
             cmdSpinner.setSelection(checkinCommond.cmdType - 1)
             cmdSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -100,6 +117,9 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
                     checkinCommond.cmdPositionY = s.toString()
                 }
             })
+            delete.setOnClickListener {
+                mCmdList?.get()?.removeData(checkinCommond)
+            }
         }
     }
 
@@ -116,5 +136,9 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
 //            TODO("Not yet implemented")
         }
 
+    }
+
+    interface AdapterListener {
+        fun updateDatabase()
     }
 }

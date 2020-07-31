@@ -62,6 +62,7 @@ class CheckinItemDbManager private constructor() {
         cv.put(MySqliteHelper.CHECK_IN_CMD_PACKAGE, checkinMainBean.cmdpack)
         mDb?.update(MySqliteHelper.CHECK_IN_TABLE_NAME, cv, MySqliteHelper.CHECK_IN_CMD_ID + "=?", arrayOf(checkinMainBean.cmdId.toString()))
         var cmds = checkinMainBean.cmdList
+        mDb?.delete(MySqliteHelper.CHECK_IN_CMD_TABLE, MySqliteHelper.CHECK_IN_CMD_NAME + "=?", arrayOf(checkinMainBean.cmdName))
         for (commond in cmds) {
             var cmdCv = ContentValues()
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_NAME, checkinMainBean.cmdName)
@@ -72,8 +73,20 @@ class CheckinItemDbManager private constructor() {
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_VIEWTYPE, commond.cmdViewType)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_POSITIONX, commond.cmdPositionX)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_POSITIONY, commond.cmdPositionY)
-            mDb?.update(MySqliteHelper.CHECK_IN_CMD_TABLE, cmdCv, MySqliteHelper.CHECK_IN_CMD_NAME + "=? and " + MySqliteHelper.CHECK_IN_CMD_STEP + "=?", arrayOf(checkinMainBean.cmdName, commond.cmdStep.toString()))
+            mDb?.insert(MySqliteHelper.CHECK_IN_CMD_TABLE, "", cmdCv)
         }
+//            for (commond in cmds) {
+//            var cmdCv = ContentValues()
+//            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_NAME, checkinMainBean.cmdName)
+//            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_STEP, commond.cmdStep)
+//            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_TYPE, commond.cmdType)
+//            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_VIEW_ID, commond.cmdViewId)
+//            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_TEXT, commond.cmdText)
+//            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_VIEWTYPE, commond.cmdViewType)
+//            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_POSITIONX, commond.cmdPositionX)
+//            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_POSITIONY, commond.cmdPositionY)
+//            mDb?.update(MySqliteHelper.CHECK_IN_CMD_TABLE, cmdCv, MySqliteHelper.CHECK_IN_CMD_NAME + "=? and " + MySqliteHelper.CHECK_IN_CMD_STEP + "=?", arrayOf(checkinMainBean.cmdName, commond.cmdStep.toString()))
+//        }
         return true
     }
 
