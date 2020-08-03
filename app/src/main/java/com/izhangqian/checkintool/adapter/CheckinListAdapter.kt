@@ -38,6 +38,7 @@ class CheckinListAdapter(context: Context) : RecyclerView.Adapter<CheckinListAda
     }
 
     fun updateData(mutableList: MutableList<CheckinMainBean>) {
+        mCheckList.clear()
         mCheckList.addAll(mutableList)
         notifyDataSetChanged()
     }

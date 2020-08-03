@@ -37,13 +37,12 @@ class MainActivity : FragmentActivity() {
             var homeItemBean = HomeItemBean(1)
             homeItemBean.name = "这是拼多多的实践" + System.currentTimeMillis()
             HomeItemDbManager.instance.insertHomeItem(homeItemBean)
+            mMainViewModel!!.getHomeDatas()
         }
-        mMainViewModel!!.mHomeData?.observe(this, object : Observer<List<HomeItemBean>?> {
-            override fun onChanged(t: List<HomeItemBean>?) {
+        mMainViewModel!!.mHomeData?.observe(this, object : Observer<MutableList<HomeItemBean>?> {
+            override fun onChanged(t: MutableList<HomeItemBean>?) {
                 if (t != null) {
-                    for (homeItem : HomeItemBean in t) {
-                        mHomeAdapter?.addItem(homeItem)
-                    }
+                    mHomeAdapter?.updataList(t)
                 }
             }
         })

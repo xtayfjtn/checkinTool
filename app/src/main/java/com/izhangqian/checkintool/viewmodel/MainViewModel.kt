@@ -9,13 +9,13 @@ import io.reactivex.ObservableOnSubscribe
 import io.reactivex.functions.Consumer
 
 class MainViewModel : ViewModel() {
-    var mHomeData : MutableLiveData<List<HomeItemBean>> = MutableLiveData()
+    var mHomeData : MutableLiveData<MutableList<HomeItemBean>> = MutableLiveData()
     fun getHomeDatas() {
-        var disposable = Observable.create(ObservableOnSubscribe<List<HomeItemBean>> {
+        var disposable = Observable.create(ObservableOnSubscribe<MutableList<HomeItemBean>> {
             var items = HomeItemDbManager.instance.getHomeItems()
             it.onNext(items)
-        }).subscribe(object : Consumer<List<HomeItemBean>?> {
-            override fun accept(t: List<HomeItemBean>?) {
+        }).subscribe(object : Consumer<MutableList<HomeItemBean>?> {
+            override fun accept(t: MutableList<HomeItemBean>?) {
                 mHomeData.postValue(t)
             }
         })

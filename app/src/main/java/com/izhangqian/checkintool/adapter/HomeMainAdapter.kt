@@ -48,6 +48,12 @@ open class HomeMainAdapter : RecyclerView.Adapter<HomeViewHolder?> {
         return mHomeItems.get(position).itemType
     }
 
+    fun updataList(list : MutableList<HomeItemBean>) {
+        mHomeItems.clear()
+        mHomeItems.addAll(list)
+        notifyDataSetChanged()
+    }
+
     fun addItem(homeItemBean: HomeItemBean) {
         mHomeItems.add(homeItemBean)
         notifyDataSetChanged()

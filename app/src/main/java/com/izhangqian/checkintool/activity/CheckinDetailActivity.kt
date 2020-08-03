@@ -53,6 +53,11 @@ class CheckinDetailActivity : AppCompatActivity() {
             mCheckinMainBean?.let { it1 -> CheckinItemDbManager.instance.insertorUpdateCheckinItem(it1) }
         }
 
+        cmd_add_btn.setOnClickListener {
+            mCheckinMainBean?.cmdList?.add(CheckinCommond())
+            mCheckinMainBean?.cmdList?.let { it1 -> commondListAdapter?.updateData(it1) }
+        }
+
         mCheckCmdDetailViewModel?.mCheckCmdDetal?.observe({ lifecycle }, {
             if (it != null) {
                 mCheckinMainBean = it

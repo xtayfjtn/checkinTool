@@ -73,18 +73,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/cmd_node_viewtype_et"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
         <TextView
             android:id="@+id/cmd_node_viewtype_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cmd_node_viewtype" />
+        <EditText
+            android:id="@+id/cmd_node_viewtype_et"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/cmd_node_viewtype" />
+            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
