@@ -2,6 +2,8 @@ package com.izhangqian.checkintool.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +16,7 @@ import com.izhangqian.checkintool.sqlite.CheckinItemDbManager
 import com.izhangqian.checkintool.utils.Constants
 import com.izhangqian.checkintool.viewmodel.CheckCmdDetailViewModel
 import kotlinx.android.synthetic.main.activity_checkin_detail.*
+import kotlin.toString as toString1
 
 class CheckinDetailActivity : AppCompatActivity() {
     var mCheckinMainBean : CheckinMainBean? = null
@@ -30,7 +33,7 @@ class CheckinDetailActivity : AppCompatActivity() {
     private fun initData() {
         mCheckinMainBean = intent.getParcelableExtra<CheckinMainBean>(Constants.EXTRA_CMD_BEAN)
         mCheckCmdDetailViewModel = ViewModelProvider(this).get(CheckCmdDetailViewModel::class.java)
-        mCheckCmdDetailViewModel?.getCheckCmdDetailByid(mCheckinMainBean?.cmdId.toString())
+        mCheckCmdDetailViewModel?.getCheckCmdDetailByid(mCheckinMainBean?.cmdId.toString1())
     }
 
     private fun initView() {
@@ -50,7 +53,10 @@ class CheckinDetailActivity : AppCompatActivity() {
 
     private fun initEvent() {
         cmd_submit_btn.setOnClickListener {
-            mCheckinMainBean?.let { it1 -> CheckinItemDbManager.instance.insertorUpdateCheckinItem(it1) }
+            mCheckinMainBean?.let {
+                it1 -> CheckinItemDbManager.instance.insertorUpdateCheckinItem(it1)
+                Toast.makeText(this, "update databases success", Toast.LENGTH_SHORT).show()
+            }
         }
 
         cmd_add_btn.setOnClickListener {
@@ -62,6 +68,18 @@ class CheckinDetailActivity : AppCompatActivity() {
             if (it != null) {
                 mCheckinMainBean = it
                 mCheckinMainBean?.cmdList?.let { it1 -> commondListAdapter?.updateData(it1) }
+            }
+        })
+
+        check_in_detail_pack_et.addTextChangedListener(object : CommondListAdapter.MyTextWatch() {
+            override fun afterTextChanged(s: Editable?) {
+                mCheckinMainBean?.cmdpack = s.toString1()
+            }
+        })
+
+        check_in_detail_name_et.addTextChangedListener(object : CommondListAdapter.MyTextWatch() {
+            override fun afterTextChanged(s: Editable?) {
+                mCheckinMainBean?.cmdName = s.toString1()
             }
         })
     }

@@ -35,6 +35,7 @@ class CheckinItemDbManager private constructor() {
         var cmds = checkinMainBean.cmdList
         for (commond in cmds) {
             var cmdCv = ContentValues()
+            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_ID, checkinMainBean.cmdId)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_NAME, checkinMainBean.cmdName)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_STEP, commond.cmdStep)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_TYPE, commond.cmdType)
@@ -62,9 +63,10 @@ class CheckinItemDbManager private constructor() {
         cv.put(MySqliteHelper.CHECK_IN_CMD_PACKAGE, checkinMainBean.cmdpack)
         mDb?.update(MySqliteHelper.CHECK_IN_TABLE_NAME, cv, MySqliteHelper.CHECK_IN_CMD_ID + "=?", arrayOf(checkinMainBean.cmdId.toString()))
         var cmds = checkinMainBean.cmdList
-        mDb?.delete(MySqliteHelper.CHECK_IN_CMD_TABLE, MySqliteHelper.CHECK_IN_CMD_NAME + "=?", arrayOf(checkinMainBean.cmdName))
+        mDb?.delete(MySqliteHelper.CHECK_IN_CMD_TABLE, MySqliteHelper.CHECK_IN_CMD_ID + "=?", arrayOf(checkinMainBean.cmdId.toString()))
         for (commond in cmds) {
             var cmdCv = ContentValues()
+            cmdCv.put(MySqliteHelper.CHECK_IN_CMD_ID, checkinMainBean.cmdId)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_NAME, checkinMainBean.cmdName)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_STEP, commond.cmdStep)
             cmdCv.put(MySqliteHelper.CHECK_IN_CMD_TYPE, commond.cmdType)
@@ -104,7 +106,7 @@ class CheckinItemDbManager private constructor() {
                     checkinMainBean.cmdId = id
                     checkinMainBean.cmdName = name
                     checkinMainBean.cmdpack = pack
-                    checkinMainBean.cmdList = getComnondsbyName(name)
+                    checkinMainBean.cmdList = getComnondsbyID(id.toString())
                     result.add(checkinMainBean)
                 } while (cursor.moveToNext())
             }
@@ -122,11 +124,11 @@ class CheckinItemDbManager private constructor() {
         return result
     }
 
-    fun getComnondsbyName(name : String) : MutableList<CheckinCommond> {
+    fun getComnondsbyID(id : String) : MutableList<CheckinCommond> {
         var cmdCursor : Cursor? = null
         var result = mutableListOf<CheckinCommond>()
         try {
-            cmdCursor = mDb?.query(MySqliteHelper.CHECK_IN_CMD_TABLE, null, MySqliteHelper.CHECK_IN_CMD_NAME + "=?", arrayOf(name), "", "", MySqliteHelper.CHECK_IN_CMD_STEP + "")
+            cmdCursor = mDb?.query(MySqliteHelper.CHECK_IN_CMD_TABLE, null, MySqliteHelper.CHECK_IN_CMD_ID + "=?", arrayOf(id), "", "", MySqliteHelper.CHECK_IN_CMD_STEP + "")
             if (cmdCursor != null && cmdCursor.moveToFirst()) {
                 do {
                     val checkinCommond = CheckinCommond()
@@ -177,7 +179,7 @@ class CheckinItemDbManager private constructor() {
                     checkinMainBean.cmdId = id
                     checkinMainBean.cmdName = name
                     checkinMainBean.cmdpack = pack
-                    checkinMainBean.cmdList = getComnondsbyName(name)
+                    checkinMainBean.cmdList = getComnondsbyID(id.toString())
                 } while (cursor.moveToNext())
             }
         } catch (e : Exception) {

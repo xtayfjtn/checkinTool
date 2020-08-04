@@ -84,7 +84,7 @@ class CommondListAdapter(context: Context) : RecyclerView.Adapter<CommondListAda
             idEt.setText(checkinCommond.cmdViewId)
             idEt.addTextChangedListener(object : MyTextWatch() {
                 override fun afterTextChanged(s: Editable?) {
-                    checkinCommond.cmdViewId = s.toString();
+                    checkinCommond.cmdViewId = s.toString()
                 }
             })
             textEt.setText(checkinCommond.cmdText)
