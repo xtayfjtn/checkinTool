@@ -14,12 +14,7 @@ import io.reactivex.schedulers.Schedulers
 class CommonDetailViewModel(application: Application) : AndroidViewModel(application) {
 
     fun updateCommon(checkinMainBean: CheckinMainBean) {
-        Observable.create(object : ObservableOnSubscribe<Boolean> {
-            override fun subscribe(e: ObservableEmitter<Boolean>?) {
-                CheckinItemDbManager.instance.insertorUpdateCheckinItem(checkinMainBean)
-            }
-
-        }).subscribeOn(Schedulers.io()).subscribe(Consumer {
+        Observable.create(ObservableOnSubscribe<Boolean> { CheckinItemDbManager.instance.insertorUpdateCheckinItem(checkinMainBean) }).subscribeOn(Schedulers.io()).subscribe(Consumer {
 
         })
     }

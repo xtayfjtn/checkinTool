@@ -15,7 +15,7 @@ class CheckCmdDetailViewModel(application: Application) : AndroidViewModel(appli
 
     fun getCheckCmdDetailByid(id : String) {
         Observable.create<CheckinMainBean> {
-            it.onNext(CheckinItemDbManager.instance.getCommondbyId(id))
+            CheckinItemDbManager.instance.getCommondbyId(id)?.let { it1 -> it.onNext(it1) }
         }.subscribeOn(Schedulers.io()).subscribe(Consumer {
             mCheckCmdDetal.postValue(it)
         })

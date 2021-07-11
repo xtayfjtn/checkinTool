@@ -18,7 +18,7 @@ class CheckChooseViewModel(application: Application) : AndroidViewModel(applicat
     val mCheckinMainBean : MutableLiveData<MutableList<CheckinMainBean>> = MutableLiveData()
     fun getCheckInData() {
         var disposable = Observable.create(object : ObservableOnSubscribe<MutableList<CheckinMainBean>> {
-            override fun subscribe(e: ObservableEmitter<MutableList<CheckinMainBean>>?) {
+            override fun subscribe(e: ObservableEmitter<MutableList<CheckinMainBean>>) {
                 var mutableList = CheckinItemDbManager.instance.getCheckinCommonds()
                 e?.onNext(mutableList)
             }
