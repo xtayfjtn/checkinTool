@@ -19,4 +19,9 @@ class FunctionItemBean {
 
     @ColumnInfo(name = "className")
     var className : String = ""
+    override fun toString(): String {
+        return "FunctionItemBean(name='$name', pkg='$pkg', action='$action', className='$className')"
+    }
+
+
 }

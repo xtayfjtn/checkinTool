@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.adapter.HomeMainAdapter
-import com.izhangqian.checkintool.bean.HomeItemBean
 import com.izhangqian.checkintool.newdb.FunctionItemBean
-import com.izhangqian.checkintool.sqlite.HomeItemDbManager
 import com.izhangqian.checkintool.utils.Logit
 import com.izhangqian.checkintool.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,6 +29,7 @@ class MainActivity : FragmentActivity() {
     private fun intData() {
         mHomeAdapter = HomeMainAdapter(applicationContext)
         mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mMainViewModel!!.getOnlineFunctions()
     }
 
     private fun initEvent() {

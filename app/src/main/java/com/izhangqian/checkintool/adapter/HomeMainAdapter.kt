@@ -6,17 +6,13 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.adapter.HomeMainAdapter.HomeViewHolder
-import com.izhangqian.checkintool.bean.HomeItemBean
 import com.izhangqian.checkintool.newdb.FunctionItemBean
 import com.izhangqian.checkintool.utils.Logit
 import kotlinx.android.synthetic.main.layout_home_recycler_item.view.*
-import kotlinx.android.synthetic.main.layout_home_item_pdd.view.*
-import java.util.logging.Logger
 
 open class HomeMainAdapter : RecyclerView.Adapter<HomeViewHolder?> {
     private var mFuntionItems : MutableList<FunctionItemBean> = mutableListOf()
