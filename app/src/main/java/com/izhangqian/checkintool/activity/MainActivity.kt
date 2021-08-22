@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.adapter.HomeMainAdapter
+import com.izhangqian.checkintool.functions.webload.WebFavorActivity
+import com.izhangqian.checkintool.functions.webload.WebLoadActivity
 import com.izhangqian.checkintool.newdb.FunctionItemBean
 import com.izhangqian.checkintool.utils.Logit
 import com.izhangqian.checkintool.viewmodel.MainViewModel
@@ -38,6 +40,11 @@ class MainActivity : FragmentActivity() {
             functionItemBean.className = CheckChooseActivity::class.java.name
             functionItemBean.name = "This is pdd"
             mMainViewModel!!.insertOneFunction(this, functionItemBean)
+
+            val webLoad = FunctionItemBean()
+            webLoad.className = WebFavorActivity::class.java.name
+            webLoad.name = "this for webload"
+            mMainViewModel!!.insertOneFunction(this, webLoad)
         }
 
         mMainViewModel!!.mHomeFuntion?.observe(this, object : Observer<MutableList<FunctionItemBean>?> {

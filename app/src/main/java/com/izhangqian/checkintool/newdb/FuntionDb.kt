@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.izhangqian.checkintool.functions.webload.beans.FavorArticle
+import com.izhangqian.checkintool.functions.webload.beans.FavorDao
 
-@Database(entities = [FunctionItemBean::class], version = 1, exportSchema = false)
+@Database(entities = [FunctionItemBean::class, FavorArticle::class], version = 1, exportSchema = false)
 abstract class FuntionDb : RoomDatabase() {
 
     abstract fun getFunctionDao() : FunctionDao?
+    abstract fun getFavorDao() : FavorDao?
 
     companion object {
         @Volatile private var instance : FuntionDb? = null

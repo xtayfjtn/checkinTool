@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidStudioProjects/checkinTool/app/src/main/res/layout/activity_main.xml" value="0.12907608695652173" />
+        <entry key="..\:/AndroidStudioProjects/checkinTool/app/src/main/res/layout/activity_web_favor_actiity.xml" value="0.1721014492753623" />
+        <entry key="..\:/AndroidStudioProjects/checkinTool/app/src/main/res/layout/activity_web_load.xml" value="0.1721014492753623" />
+        <entry key="..\:/AndroidStudioProjects/checkinTool/app/src/main/res/layout/favor_rv_item.xml" value="0.1721014492753623" />
         <entry key="..\:/AndroidStudioProjects/checkinTool/app/src/main/res/layout/layout_home_item_pdd.xml" value="0.12907608695652173" />
         <entry key="..\:/AndroidStudioProjects/checkinTool/app/src/main/res/layout/layout_home_recycler_item.xml" value="0.1766304347826087" />
       </map>
