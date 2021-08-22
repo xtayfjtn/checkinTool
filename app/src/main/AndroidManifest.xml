@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.izhangqian.checkintool">
+    package="com.izhangqian.checkintool" >
 
     <application
         android:name=".MyApplication"
@@ -10,15 +10,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="false"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activity.CheckinDetailActivity">
+        android:theme="@style/AppTheme" >
+        <activity android:name=".activity.CheckinDetailActivity" >
             <intent-filter>
                 <action android:name="com.izhangqian.action.CMD_DETAIL" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".activity.UtilActivity" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +39,7 @@
             android:exported="false" />
         <service
             android:name=".service.MyService"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>

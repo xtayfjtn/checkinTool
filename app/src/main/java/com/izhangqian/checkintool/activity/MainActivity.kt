@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.OrientationHelper
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.adapter.HomeMainAdapter
 import com.izhangqian.checkintool.bean.HomeItemBean
+import com.izhangqian.checkintool.newdb.FunctionItemBean
 import com.izhangqian.checkintool.sqlite.HomeItemDbManager
+import com.izhangqian.checkintool.utils.Logit
 import com.izhangqian.checkintool.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -29,18 +31,19 @@ class MainActivity : FragmentActivity() {
     private fun intData() {
         mHomeAdapter = HomeMainAdapter(applicationContext)
         mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        mMainViewModel!!.getHomeDatas()
     }
 
     private fun initEvent() {
         test_add_btn.setOnClickListener {
-            var homeItemBean = HomeItemBean(1)
-            homeItemBean.name = "这是拼多多的实践" + System.currentTimeMillis()
-            HomeItemDbManager.instance.insertHomeItem(homeItemBean)
-            mMainViewModel!!.getHomeDatas()
+            val functionItemBean = FunctionItemBean()
+            functionItemBean.className = CheckChooseActivity::class.java.name
+            functionItemBean.name = "This is pdd"
+            mMainViewModel!!.insertOneFunction(this, functionItemBean)
         }
-        mMainViewModel!!.mHomeData?.observe(this, object : Observer<MutableList<HomeItemBean>?> {
-            override fun onChanged(t: MutableList<HomeItemBean>?) {
+
+        mMainViewModel!!.mHomeFuntion?.observe(this, object : Observer<MutableList<FunctionItemBean>?> {
+            override fun onChanged(t: MutableList<FunctionItemBean>?) {
+                Logit.e(TAG, "here result: $t")
                 if (t != null) {
                     mHomeAdapter?.updataList(t)
                 }

@@ -1,23 +1,28 @@
 package com.izhangqian.checkintool.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.izhangqian.checkintool.bean.HomeItemBean
-import com.izhangqian.checkintool.sqlite.HomeItemDbManager
-import io.reactivex.Observable
-import io.reactivex.ObservableOnSubscribe
-import io.reactivex.functions.Consumer
+import android.app.Application
+import android.content.Context
+import androidx.lifecycle.*
+import com.izhangqian.checkintool.newdb.FunctionItemBean
+import com.izhangqian.checkintool.newdb.FuntionDb
+import com.izhangqian.checkintool.utils.Logit
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
-    var mHomeData : MutableLiveData<MutableList<HomeItemBean>> = MutableLiveData()
-    fun getHomeDatas() {
-        var disposable = Observable.create(ObservableOnSubscribe<MutableList<HomeItemBean>> {
-            var items = HomeItemDbManager.instance.getHomeItems()
-            it.onNext(items)
-        }).subscribe(object : Consumer<MutableList<HomeItemBean>?> {
-            override fun accept(t: MutableList<HomeItemBean>?) {
-                mHomeData.postValue(t)
-            }
-        })
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+    companion object {
+        val TAG = "MainViewModel"
+    }
+
+    var mHomeFuntion : LiveData<MutableList<FunctionItemBean>>? = null
+    init {
+        mHomeFuntion = FuntionDb.getInstance(application).getFunctionDao()!!.getAllFuntion()
+    }
+
+    fun insertOneFunction(context: Context, functionItemBean: FunctionItemBean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            var result = FuntionDb.getInstance(context).getFunctionDao()!!.insertOneItem(functionItemBean)
+            Logit.e(TAG, "insert result $result")
+        }
     }
 }
