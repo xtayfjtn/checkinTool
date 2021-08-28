@@ -14,7 +14,7 @@ class CommonJumpHandler(listener: ServiceListener) : ActionHandler(listener) {
         if (mListener is Context) {
             var context = (mListener as Context)
             var intent = context.packageManager.getLaunchIntentForPackage(packagePdd)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent!!.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             (mListener as Context).startActivity(intent)
         }

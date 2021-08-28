@@ -13,12 +13,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".functions.webload.WebFavorActivity"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".functions.webload.WebLoadActivity"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".activity.CheckinDetailActivity">
             <intent-filter>
                 <action android:name="com.izhangqian.action.CMD_DETAIL" />
@@ -42,9 +42,6 @@
             android:exported="true" />
         <service
             android:name=".service.JobIntentService"
-            android:exported="false" />
-        <service
-            android:name=".service.MyIntentService"
             android:exported="false" />
         <service
             android:name=".service.MyService"

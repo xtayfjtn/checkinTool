@@ -18,7 +18,7 @@ class WebLoadActivity : AppCompatActivity() {
         if (TextUtils.isEmpty(url)) {
             url = "http://www.baidu.com"
         }
-        wb_load_view.loadUrl(url)
+        wb_load_view.loadUrl(url!!)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".functions.webload.WebLoadActivity">
 
-    <WebView
+    <com.izhangqian.checkintool.functions.webload.RecordWebView
         android:id="@+id/wb_load_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
