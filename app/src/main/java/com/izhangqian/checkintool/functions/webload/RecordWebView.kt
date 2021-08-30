@@ -8,6 +8,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.izhangqian.checkintool.utils.CachHelper
 import com.izhangqian.checkintool.utils.Logit
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -45,6 +46,12 @@ class RecordWebView : WebView {
                     return true
                 }
 //                return super.shouldOverrideUrlLoading(view, request)
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                val scrollY = CachHelper.get(context, url!!, 0) as Int
+                view!!.scrollY = scrollY
             }
         }
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.KeyEvent
 import com.izhangqian.checkintool.R
+import com.izhangqian.checkintool.utils.CachHelper
 import kotlinx.android.synthetic.main.activity_web_load.*
 
 class WebLoadActivity : AppCompatActivity() {
@@ -19,6 +20,13 @@ class WebLoadActivity : AppCompatActivity() {
             url = "http://www.baidu.com"
         }
         wb_load_view.loadUrl(url!!)
+    }
+
+    override fun onPause() {
+        val url = wb_load_view.url
+        val scrollY = wb_load_view.scrollY
+        CachHelper.put(applicationContext, url, scrollY)
+        super.onPause()
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
