@@ -21,4 +21,6 @@
     <string name="cmd_node_desc">点击描述文本</string>
     <string name="cmd_node_positionX">点击x坐标</string>
     <string name="cmd_node_positonY">点击y坐标</string>
+
+    <string name="wb_back_to_top">回到顶部</string>
 </resources>

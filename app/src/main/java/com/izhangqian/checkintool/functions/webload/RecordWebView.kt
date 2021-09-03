@@ -26,6 +26,12 @@ class RecordWebView : WebView {
                 Logit.i(TAG, "new progress: $newProgress")
                 super.onProgressChanged(view, newProgress)
             }
+
+            override fun onReceivedTitle(view: WebView?, title: String?) {
+                Logit.i(TAG, "received title $title")
+                setTitle(title)
+                super.onReceivedTitle(view, title)
+            }
         }
 
         webViewClient = object : WebViewClient() {
@@ -59,5 +65,10 @@ class RecordWebView : WebView {
         settings.builtInZoomControls = true
         settings.setSupportZoom(true)
         settings.domStorageEnabled = true
+    }
+
+    var setTitle : (String?) -> Unit = {}
+    fun setTitlecallback(titleCallBack : (String?)-> Unit) {
+        setTitle = titleCallBack
     }
 }

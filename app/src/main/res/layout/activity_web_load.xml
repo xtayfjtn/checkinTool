@@ -6,13 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".functions.webload.WebLoadActivity">
 
+    <TextView
+        android:id="@+id/wb_back_to_top"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/wb_more_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/wb_more_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_icon_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.izhangqian.checkintool.functions.webload.RecordWebView
         android:id="@+id/wb_load_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wb_back_to_top"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

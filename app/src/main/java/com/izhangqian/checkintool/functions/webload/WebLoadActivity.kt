@@ -6,11 +6,13 @@ import android.text.TextUtils
 import android.view.KeyEvent
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.utils.CachHelper
+import com.izhangqian.checkintool.utils.Logit
 import kotlinx.android.synthetic.main.activity_web_load.*
 
 class WebLoadActivity : AppCompatActivity() {
     companion object {
         val WEB_URL = "web_url"
+        val TAG = "WebLoadActivity"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,13 @@ class WebLoadActivity : AppCompatActivity() {
             url = "http://www.baidu.com"
         }
         wb_load_view.loadUrl(url!!)
+        wb_load_view.setTitlecallback {
+            Logit.i(TAG, "here is finish load")
+            wb_back_to_top.text = it ?: getString(R.string.wb_back_to_top)
+        }
+        wb_back_to_top.setOnClickListener {
+            wb_load_view.scrollTo(0, 0)
+        }
     }
 
     override fun onPause() {
