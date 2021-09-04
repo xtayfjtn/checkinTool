@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.PopupWindow
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.utils.CachHelper
 import com.izhangqian.checkintool.utils.Logit
@@ -29,6 +32,16 @@ class WebLoadActivity : AppCompatActivity() {
         wb_back_to_top.setOnClickListener {
             wb_load_view.scrollTo(0, 0)
         }
+        wb_more_img.setOnClickListener {
+            val view = LayoutInflater.from(this).inflate(R.layout.web_pop_window_layout, null)
+            val popWindow = WebPopWindow(this)
+            popWindow.setBackgroundDrawable(null)
+            popWindow.contentView = view
+            popWindow.width = ViewGroup.LayoutParams.WRAP_CONTENT
+            popWindow.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            popWindow.showAsDropDown(wb_more_img)
+            popWindow.isOutsideTouchable = true
+        }
     }
 
     override fun onPause() {
@@ -44,5 +57,9 @@ class WebLoadActivity : AppCompatActivity() {
             return true
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    fun getWebLink() : String? {
+        return wb_load_view?.url
     }
 }

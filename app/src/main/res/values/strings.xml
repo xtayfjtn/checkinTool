@@ -23,4 +23,6 @@
     <string name="cmd_node_positonY">点击y坐标</string>
 
     <string name="wb_back_to_top">回到顶部</string>
+    <string name="wb_copy_link">复制链接</string>
+    <string name="wb_open_browser">在浏览器中打开</string>
 </resources>
