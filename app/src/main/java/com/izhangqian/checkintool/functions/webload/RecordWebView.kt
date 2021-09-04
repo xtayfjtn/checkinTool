@@ -21,6 +21,7 @@ class RecordWebView : WebView {
         val TAG = "RecordWebView"
     }
     init {
+        addJavascriptInterface(MyJavascriptInterface(context), "imagelistener")
         webChromeClient = object : WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 Logit.i(TAG, "new progress: $newProgress")
@@ -58,6 +59,20 @@ class RecordWebView : WebView {
                 super.onPageFinished(view, url)
                 val scrollY = CachHelper.get(context, url!!, 0) as Int
                 view!!.scrollY = scrollY
+                addImageClickListener(view)
+            }
+
+            fun addImageClickListener(view : WebView?) {
+                view?.loadUrl("javascript:(function(){" +
+                        "var objs = document.getElementsByTagName('img');" +
+                        "for (var i = 0;i < objs.length; i++)" +
+                        "{" +
+                        " objs[i].onclick=function()" +
+                        "{" +
+                        " window.imagelistener.openImage(this.src);" +
+                        "}" +
+                        "}" +
+                        "})()")
             }
         }
 
