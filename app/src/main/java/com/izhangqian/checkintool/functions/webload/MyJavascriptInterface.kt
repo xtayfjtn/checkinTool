@@ -10,9 +10,12 @@ class MyJavascriptInterface(val context: Context) {
     }
     @android.webkit.JavascriptInterface
     fun openImage(img : String) {
-        Logit.i(TAG, "image url: $img")
-        val intent = Intent(context, ImageLoadActivity::class.java)
-        intent.putExtra("imageUrl", img)
-        context.startActivity(intent)
+        Logit.i(TAG, "image url: $img $context")
+        if (context is WebLoadActivity) {
+            context.showImageView(img)
+        }
+//        val intent = Intent(context, ImageLoadActivity::class.java)
+//        intent.putExtra("imageUrl", img)
+//        context.startActivity(intent)
     }
 }

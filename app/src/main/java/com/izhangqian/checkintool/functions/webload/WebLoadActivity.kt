@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
+import com.bumptech.glide.Glide
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.utils.CachHelper
 import com.izhangqian.checkintool.utils.Logit
@@ -41,6 +43,24 @@ class WebLoadActivity : AppCompatActivity() {
             popWindow.height = ViewGroup.LayoutParams.WRAP_CONTENT
             popWindow.showAsDropDown(wb_more_img)
             popWindow.isOutsideTouchable = true
+        }
+
+    }
+
+    fun showImageView(url : String?) {
+        runOnUiThread {
+            photo_view_img.visibility = View.VISIBLE
+            try {
+                Glide.with(this).load(url).into(photo_view_img)
+            } catch (e : Exception) {
+                e.printStackTrace()
+            }
+            photo_view_img.enable()
+            Logit.i(TAG, "SHOW IMAGE")
+            photo_view_img.setOnClickListener {
+                Logit.i(TAG, "GONE IMAGE")
+                photo_view_img.visibility = View.GONE
+            }
         }
     }
 
