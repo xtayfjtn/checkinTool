@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.izhangqian.checkintool.R
 import com.izhangqian.checkintool.functions.webload.beans.FavorArticle
 import com.izhangqian.checkintool.utils.Logit
@@ -48,6 +50,7 @@ class FavorAdapter(var context: Context) : RecyclerView.Adapter<FavorAdapter.Fav
 
         private val titleTv = itemView.findViewById<TextView>(R.id.favor_url_name)
         private val layout = itemView.findViewById<ConstraintLayout>(R.id.favor_layout_cl)
+        private val icon = itemView.findViewById<ImageView>(R.id.favor_item_icon)
         open fun onBindView(favorArticle: FavorArticle) {
             Logit.i("FavorHolder", favorArticle.toString())
             titleTv.text = favorArticle.title
@@ -57,6 +60,7 @@ class FavorAdapter(var context: Context) : RecyclerView.Adapter<FavorAdapter.Fav
                 intent.putExtra(WebLoadActivity.WEB_URL, favorArticle.url)
                 itemView.context.startActivity(intent)
             }
+            Glide.with(itemView.context).load(favorArticle.imgurl).error(R.mipmap.new_icon).into(icon)
         }
     }
 }
