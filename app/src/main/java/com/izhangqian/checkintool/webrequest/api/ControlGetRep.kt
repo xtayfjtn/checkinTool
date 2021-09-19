@@ -12,4 +12,8 @@ object ControlGetRep {
     fun getFavors() : Observable<List<FavorArticle>> {
         return WebClient.getControl().getFavors()
     }
+
+    fun getZLFavors() : Observable<List<FavorArticle>> {
+        return WebClient.getControl().getZLFavors()
+    }
 }

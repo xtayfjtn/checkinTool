@@ -12,9 +12,13 @@
         android:testOnly="false"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".functions.webload.ZLFavorActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity
             android:name=".functions.webload.ImageLoadActivity"
-            android:theme="@style/MyTranscluent"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/MyTranscluent" />
         <activity
             android:name=".functions.webload.WebFavorActivity"
             android:exported="false"

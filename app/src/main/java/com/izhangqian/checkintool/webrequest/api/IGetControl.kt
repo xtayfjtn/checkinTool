@@ -12,4 +12,7 @@ interface IGetControl {
 
     @GET("sweethouse/totransport/raw/master/myfavor.json")
     fun getFavors() : Observable<List<FavorArticle>>
+
+    @GET("sweethouse/totransport/raw/master/zlfavor.json")
+    fun getZLFavors() : Observable<List<FavorArticle>>
 }
