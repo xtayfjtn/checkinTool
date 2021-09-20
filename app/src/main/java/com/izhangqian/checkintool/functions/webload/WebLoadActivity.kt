@@ -38,6 +38,7 @@ class WebLoadActivity : AppCompatActivity() {
             val view = LayoutInflater.from(this).inflate(R.layout.web_pop_window_layout, null)
             val popWindow = WebPopWindow(this)
             popWindow.setBackgroundDrawable(null)
+            popWindow.isOutsideTouchable = true
             popWindow.contentView = view
             popWindow.width = ViewGroup.LayoutParams.WRAP_CONTENT
             popWindow.height = ViewGroup.LayoutParams.WRAP_CONTENT
