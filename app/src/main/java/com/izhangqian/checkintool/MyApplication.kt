@@ -1,6 +1,7 @@
 package com.izhangqian.checkintool
 
 import android.app.Application
+import com.izhangqian.checkintool.upgrade.CheckUpgrade
 
 class MyApplication : Application() {
 
@@ -11,5 +12,6 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         application = this
+        CheckUpgrade.checkForUpdate(this)
     }
 }
