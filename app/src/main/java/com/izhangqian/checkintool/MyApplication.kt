@@ -12,6 +12,5 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         application = this
-        CheckUpgrade.checkForUpdate(this)
     }
 }

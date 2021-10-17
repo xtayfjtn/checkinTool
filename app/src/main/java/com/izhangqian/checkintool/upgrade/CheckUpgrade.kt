@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Environment
 import androidx.core.content.FileProvider
 import com.izhangqian.checkintool.MyApplication
+import com.izhangqian.checkintool.dialog.CommonTwoDialog
 import com.izhangqian.checkintool.utils.Logit
 import com.izhangqian.checkintool.webrequest.api.ControlGetRep
 import io.reactivex.Observer
@@ -30,6 +31,8 @@ object CheckUpgrade {
                 val version = pkgInfo.versionCode
                 Logit.i(TAG, "local version : $version, remote: ${it.apkVersion}")
                 if (version < it.apkVersion) {
+                    //此处弹个框
+                    CommonTwoDialog.Builder()
                     getNewApk(it.apkUrl)
                 }
 

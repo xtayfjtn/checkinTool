@@ -12,6 +12,7 @@ import com.izhangqian.checkintool.adapter.HomeMainAdapter
 import com.izhangqian.checkintool.functions.webload.WebFavorActivity
 import com.izhangqian.checkintool.functions.webload.WebLoadActivity
 import com.izhangqian.checkintool.newdb.FunctionItemBean
+import com.izhangqian.checkintool.upgrade.CheckUpgrade
 import com.izhangqian.checkintool.utils.Logit
 import com.izhangqian.checkintool.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,6 +24,7 @@ class MainActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        CheckUpgrade.checkForUpdate(this)
         intData()
         initView()
         initEvent()
